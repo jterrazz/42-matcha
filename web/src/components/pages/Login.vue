@@ -1,53 +1,55 @@
 <template>
-    <div>
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-            <b-form-group
-                    id="input-group-1"
-                    label="Email address:"
-                    label-for="input-1"
-                    description="We'll never share your email with anyone else."
-            >
-                <b-form-input
-                        id="input-1"
-                        v-model="form.email"
-                        type="email"
-                        required
-                        placeholder="Enter email"
-                ></b-form-input>
-            </b-form-group>
+    <b-container fluid class="h-100">
+        <b-row class="h-100-md">
+            <b-col order-md="2" class="div__auth--primary d-flex align-items-center justify-content-center py-5 px-4 text-light">
+                <div class="container__auth w-100">
+                    <div class="text-center p-3 p-md-5">
+                        <h2>Welcome</h2>
+                        <p>Glad to see you again</p>
+                    </div>
 
-            <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-                <b-form-input
-                        id="input-2"
-                        v-model="form.name"
-                        required
-                        placeholder="Enter name"
-                ></b-form-input>
-            </b-form-group>
+                    <b-form @submit="onSubmit" @reset="onReset" class="form__auth">
+                        <b-form-group
+                                id="input-group-1"
+                                label="Username"
+                                label-for="input-1"
+                        >
+                            <b-form-input
+                                    id="input-1"
+                                    v-model="form.username"
+                                    required
+                                    placeholder="Enter username"
+                            ></b-form-input>
+                        </b-form-group>
 
-            <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-                <b-form-select
-                        id="input-3"
-                        v-model="form.food"
-                        :options="foods"
-                        required
-                ></b-form-select>
-            </b-form-group>
+                        <b-form-group id="input-group-2" label="Password" label-for="input-2">
+                            <b-form-input
+                                    id="input-2"
+                                    v-model="form.password"
+                                    required
+                                    placeholder="Enter password"
+                            ></b-form-input>
+                        </b-form-group>
 
-            <b-form-group id="input-group-4">
-                <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-                    <b-form-checkbox value="me">Check me out</b-form-checkbox>
-                    <b-form-checkbox value="that">Check that out</b-form-checkbox>
-                </b-form-checkbox-group>
-            </b-form-group>
+                        <router-link to="/reset-password" class="text-md-right text-center">
+                            <p class="text-white small-text">Forgot password ?</p>
+                        </router-link>
 
-            <b-button type="submit" variant="primary">Submit</b-button>
-            <b-button type="reset" variant="danger">Reset</b-button>
-        </b-form>
-        <b-card class="mt-3" header="Form Data Result">
-            <pre class="m-0">{{ form }}</pre>
-        </b-card>
-    </div>
+                        <b-button type="submit" variant="danger" class="w-100 rounded mt-2">Login</b-button>
+                        <div class="d-flex flex-column p-3 d-md-none">
+                            <router-link to="register" class="text-danger font-weight-bold align-self-end">Register</router-link>
+                        </div>
+                    </b-form>
+                </div>
+            </b-col>
+
+            <b-col order-md="1" md="6" lg="7" class="d-flex flex-column align-items-center justify-content-center py-5 px-4">
+                <img src="/images/love-0.png" style="width: 240px">
+                <h1 class="mt-5 font-weight-lighter">Discover bl alds  asdl lsd as dals </h1>
+                <p>Discover new peiple and a.d elf mwef weod k</p>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
@@ -55,18 +57,14 @@
         data() {
             return {
                 form: {
-                    email: '',
-                    name: '',
-                    food: null,
-                    checked: []
+                    username: '',
+                    password: '',
                 },
-                foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-                show: true
             }
         },
         methods: {
-            onSubmit(evt) {
-                evt.preventDefault()
+            onSubmit(e) {
+                e.preventDefault()
                 alert(JSON.stringify(this.form))
             },
             onReset(evt) {
@@ -85,3 +83,40 @@
         }
     }
 </script>
+
+<style lang="scss">
+    @import "../../styles/_variables.scss";
+
+    .small-text {
+        font-size: 0.86rem;
+    }
+
+    .div__auth--primary {
+        background-color: $primary;
+
+        .text-light {
+            color: lightslategrey !important;
+        }
+    }
+
+    .container__auth {
+        max-width: 350px;
+    }
+
+    .form__auth {
+        input {
+            background-color: $primary_darker;
+            border: 0;
+            color: white;
+            font-weight: 500;
+            &::placeholder {
+                color: rgba(255, 255, 255, 0.4);
+                opacity: 1;
+            }
+            &:focus {
+                color: white;
+                background-color: $primary_darkest;
+            }
+        }
+    }
+</style>

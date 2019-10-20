@@ -1,0 +1,7 @@
+@import "./_variables.scss";
+
+@include if_above(sm) {
+  .h-100-md {
+    height: 100%;
+  }
+}

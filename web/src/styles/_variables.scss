@@ -1,1 +1,23 @@
-$primary: purple;
+$primary: rgb(76, 89, 185);
+$primary_darker: rgb(60, 73, 161);
+$primary_darkest: rgb(31, 41, 107);
+
+$danger: rgb(232, 107, 127);
+
+$breakpoints: (
+  xs: 576px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px
+);
+
+@mixin if_above($break_point) {
+  @if map-has-key($breakpoints, $break_point) {
+    $size: map-get($breakpoints, $break_point);
+    @media (min-width: $size) {
+      @content;
+    }
+  } @else {
+    @warn 'Breakpoint #{$break_point} doesn\'t exist.';
+  }
+}

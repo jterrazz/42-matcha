@@ -1,0 +1,11 @@
+.button__rounded--transparent {
+  border: 1px solid black;
+  border-radius: 200px;
+}
+
+.button--white {
+  border-color: white;
+  &, a {
+    color: white !important;
+  }
+}
