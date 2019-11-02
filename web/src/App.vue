@@ -1,25 +1,52 @@
 <template>
   <div id="app">
-    <b-navbar fixed="top" toggleable="lg" variant="transparent" class="d-none d-md-flex">
-      <b-navbar-brand to="/">Matcha</b-navbar-brand>
+    <header>
+      <b-navbar :key="$route.fullPath" v-if="isAuthPage" fixed="top" toggleable="lg" variant="transparent" class="d-none d-md-flex">
+        <b-navbar-brand :to="{ name: 'home' }">Matcha</b-navbar-brand>
         <b-navbar-nav class="ml-auto">
-            <b-nav-item v-if="$route.name !== 'login'" to='/login' class="button__rounded--transparent button--white px-4">Login</b-nav-item>
-            <b-nav-item v-if="$route.name !== 'register'" to='/register' class="button__rounded--transparent button--white px-4">Register</b-nav-item>
+          <b-nav-item v-if="$route.name !== 'login'" :to="{ name: 'login' }" class="button__rounded--transparent button--white px-4">Login</b-nav-item>
+          <b-nav-item v-if="$route.name !== 'register'" :to="{ name: 'register' }" class="button__rounded--transparent button--white px-4">Register</b-nav-item>
         </b-navbar-nav>
-    </b-navbar>
-    <main class="h-100">
+      </b-navbar>
+      <b-navbar v-else fixed="top" variant="white" class="text-white shadow-sm">
+        <b-navbar-brand :to="{ name: 'home' }">Matcha</b-navbar-brand>
+        <b-nav-item :to="{ name: 'home' }">Home</b-nav-item>
+        <b-nav-item :to="{ name: 'discover' }">Discover</b-nav-item>
+        <b-nav-item :to="{ name: 'me' }">My Profile</b-nav-item>
+        <b-nav-item :to="{ name: 'messages' }">Messages</b-nav-item>
+        <b-nav-item>Logout</b-nav-item>
+      </b-navbar>
+    </header>
+
+    <main :class="{ 'nav-padding': !isAuthPage }">
       <router-view class="router-view"/>
     </main>
+
+    <footer v-if="isAuthPage" class="text-right fixed-bottom">
+      <p>Credits - frontend @jterrazz - backend @abbensid</p>
+      <p>42</p>
+    </footer>
+    <footer v-else class="bg-white">
+      <p>Credits - frontend @jterrazz - backend @abbensid</p>
+      <p>42</p>
+    </footer>
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
+  data: function() {
+    return {
+      isAuthPage: ['login', 'register'].indexOf(this.$route.name) >= 0
+    }
+  }
 }
 </script>
 
-<style>
+<style lang="scss">
+  @import 'styles/_variables.scss';
+
   body, html {
     height: 100%;
   }
@@ -27,6 +54,10 @@ export default {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100%;
+    min-height: 100%;
+    background-color: $background;
+  }
+  .nav-padding {
+    padding-top: 56px;
   }
 </style>

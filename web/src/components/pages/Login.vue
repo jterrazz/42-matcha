@@ -1,8 +1,8 @@
 <template>
-    <b-container fluid class="h-100">
+    <b-container fluid class="container__auth">
         <b-row class="h-100-md">
-            <b-col order-md="2" class="div__auth--primary d-flex align-items-center justify-content-center py-5 px-4 text-light">
-                <div class="container__auth w-100">
+            <b-col order-md="2" class="div__auth--primary d-flex align-items-center justify-content-center py-5 px-4 text-light gd-hot">
+                <div class="auth-form__container w-100">
                     <div class="text-center p-3 p-md-5">
                         <h2>Welcome</h2>
                         <p>Glad to see you again</p>
@@ -39,6 +39,14 @@
                         <div class="d-flex flex-column p-3 d-md-none">
                             <router-link to="register" class="text-danger font-weight-bold align-self-end">Register</router-link>
                         </div>
+
+                        <div>
+
+
+                            <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook' }"/>
+                            <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin' }"/>
+                            <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }"/>
+                        </div>
                     </b-form>
                 </div>
             </b-col>
@@ -66,6 +74,7 @@
             onSubmit(e) {
                 e.preventDefault()
                 alert(JSON.stringify(this.form))
+                this.$router.push({ name: 'home' })
             },
             onReset(evt) {
                 evt.preventDefault()
@@ -87,19 +96,20 @@
 <style lang="scss">
     @import "../../styles/_variables.scss";
 
+    .container__auth {
+        height: 100vh;
+    }
     .small-text {
         font-size: 0.86rem;
     }
 
     .div__auth--primary {
-        background-color: $primary;
-
         .text-light {
             color: lightslategrey !important;
         }
     }
 
-    .container__auth {
+    .auth-form__container {
         max-width: 350px;
     }
 

@@ -1,8 +1,19 @@
-$primary: rgb(76, 89, 185);
+$primary: #283149;
+$secondary: #404b69;
+$warning: #f73859;
+$muted: #899bb4;
+
 $primary_darker: rgb(60, 73, 161);
 $primary_darkest: rgb(31, 41, 107);
 
+@media (min-width: 1200px) {
+  .container{
+    max-width: 1400px;
+  }
+}
+
 $danger: rgb(232, 107, 127);
+$background: #f6f6f6;
 
 $breakpoints: (
   xs: 576px,
@@ -10,6 +21,17 @@ $breakpoints: (
   md: 992px,
   lg: 1200px
 );
+
+.nav-item {
+  display: flex;
+}
+
+$red0: rgb(221, 69, 135);
+$orange0: rgb(255, 135, 66);
+
+.gd-hot {
+  background: linear-gradient(30deg, $red0, $orange0);
+}
 
 @mixin if_above($break_point) {
   @if map-has-key($breakpoints, $break_point) {
