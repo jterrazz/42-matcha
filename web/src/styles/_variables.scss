@@ -2,6 +2,7 @@ $primary: #283149;
 $secondary: #404b69;
 $warning: #f73859;
 $muted: #899bb4;
+$border: #d5dfec;
 
 $primary_darker: rgb(60, 73, 161);
 $primary_darkest: rgb(31, 41, 107);
@@ -13,7 +14,7 @@ $primary_darkest: rgb(31, 41, 107);
 }
 
 $danger: rgb(232, 107, 127);
-$background: #f6f6f6;
+$background: #fdfdfd;
 
 $breakpoints: (
   xs: 576px,
@@ -31,6 +32,10 @@ $orange0: rgb(255, 135, 66);
 
 .gd-hot {
   background: linear-gradient(30deg, $red0, $orange0);
+}
+
+.gd-m {
+  background: linear-gradient(321.73deg, #FFC750 0%, #FF6895 40.06%, #5666F6 80.89%, #5FC5A6 100%);
 }
 
 @mixin if_above($break_point) {
