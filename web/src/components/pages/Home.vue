@@ -35,6 +35,7 @@
 
 <script>
 import Flickity from "vue-flickity";
+import { mapState } from "vuex";
 
 import MePreview from "../molecules/MePreview";
 import ContactsList from "../organisms/ContactsList";
@@ -54,51 +55,15 @@ export default {
       contain: true,
       groupCells: true
       // autoPlay: 5000
-    },
-    me: {
-      firstName: "Jean-Baptiste",
-      lastName: "Terrazzoni",
-      postalAddress: "75017 Paris",
-      description: "Amazing description bla bl al lbal bl bll bla",
-      likedBy: [
-        {
-          firstName: "Jean-Baptiste",
-          lastName: "Terrazzoni",
-          postalAddress: "75017 Paris"
-        },
-        {
-          firstName: "Jean-Baptiste",
-          lastName: "Terrazzoni",
-          postalAddress: "75017 Paris"
-        },
-        {
-          firstName: "Jean-Baptiste",
-          lastName: "Terrazzoni",
-          postalAddress: "75017 Paris"
-        },
-        {
-          firstName: "Jean-Baptiste",
-          lastName: "Terrazzoni",
-          postalAddress: "75017 Paris"
-        },
-        {
-          firstName: "Jean-Baptiste",
-          lastName: "Terrazzoni",
-          postalAddress: "75017 Paris"
-        },
-        {
-          firstName: "Jean-Baptiste",
-          lastName: "Terrazzoni",
-          postalAddress: "75017 Paris"
-        },
-        {
-          firstName: "Jean-Baptiste",
-          lastName: "Terrazzoni",
-          postalAddress: "75017 Paris"
-        }
-      ]
     }
-  })
+  }),
+  computed: mapState({
+    me: state => state.auth.me
+  }),
+  mounted() {
+    this.$store.dispatch("auth/fetchMeIfNeeded");
+    this.$store.dispatch("auth/fetchMyInteractions");
+  }
 };
 </script>
 

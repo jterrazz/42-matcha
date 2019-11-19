@@ -37,19 +37,27 @@
           <b-navbar-brand :to="{ name: 'home' }">Matcha</b-navbar-brand>
           <b-navbar-nav>
             <b-nav-item :to="{ name: 'home' }">Home</b-nav-item>
+            <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
             <b-nav-item :to="{ name: 'discover' }">Discover</b-nav-item>
-            <b-nav-item :to="{ name: 'me' }">My Profile</b-nav-item>
             <b-nav-item :to="{ name: 'messages' }">Messages</b-nav-item>
           </b-navbar-nav>
 
           <b-navbar-nav class="ml-auto">
             <b-nav-item>
-              <img src="./assets/bell.svg" alt="disconnect" height="20" />
+              <Badge :count="7" :padding="7">
+                <img src="./assets/bell.svg" alt="disconnect" height="20" />
+              </Badge>
             </b-nav-item>
-
             <b-nav-item-dropdown right>
               <NotificationRow />
             </b-nav-item-dropdown>
+
+            <b-nav-item-dropdown text="me" right>
+              <b-nav-item :to="{ name: 'profile', params: {username: 'jterrazz'} }">My Profile</b-nav-item>
+              <b-nav-item :to="{ name: 'settings' }">Settings</b-nav-item>
+              <b-nav-item :to="{ name: 'logout' }">Disconnect</b-nav-item>
+            </b-nav-item-dropdown>
+
             <b-nav-item>
               <img src="./assets/power.svg" alt="disconnect" height="20" />
             </b-nav-item>
@@ -75,9 +83,10 @@
 
 <script>
 import NotificationRow from "./components/molecules/NotificationRow";
+import Badge from "./components/atoms/Bagde";
 export default {
   name: "App",
-  components: { NotificationRow },
+  components: {Badge, NotificationRow },
   data: function() {
     return {
       isAuthPage: ["login", "register"].indexOf(this.$route.name) >= 0

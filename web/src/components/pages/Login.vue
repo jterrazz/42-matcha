@@ -85,6 +85,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data() {
     return {
@@ -95,10 +97,11 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["auth/login"]),
     onSubmit(e) {
       e.preventDefault();
-      alert(JSON.stringify(this.form));
-      this.$router.push({ name: "home" });
+      this["auth/login"](this.form).catch(err => console.error(err));
+      // this.$router.push({ name: "home" });
     },
     onReset(evt) {
       evt.preventDefault();

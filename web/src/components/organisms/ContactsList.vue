@@ -1,11 +1,11 @@
 <template>
   <nav class="bg-white p-3 shadow-sm rounded">
-    <div v-if="contacts.length">
+    <div v-if="contacts && contacts.length">
       <h3 class="section-title">Contacts</h3>
       <div class="dropdown-divider" />
       <ContactRow
         v-for="c in contacts"
-        :name="c.name"
+        :name="`${c.firstName} ${c.lastName}`"
         :last-message="c.lastMessage"
         class="mt-3"
       ></ContactRow>
@@ -25,7 +25,7 @@ export default {
     ContactRow
   },
   props: {
-    contacts: { type: Array, default: [] }
+    contacts: { type: Array }
   }
 };
 </script>
