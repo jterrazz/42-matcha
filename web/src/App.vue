@@ -1,97 +1,38 @@
 <template>
-  <div id="app">
-    <header>
-      <b-navbar
-        v-if="isAuthPage"
-        :key="$route.fullPath"
-        fixed="top"
-        toggleable="lg"
-        variant="transparent"
-        class="d-none d-md-flex"
-      >
-        <b-navbar-brand :to="{ name: 'home' }">Matcha</b-navbar-brand>
-        <b-navbar-nav class="ml-auto">
-          <b-nav-item
-            v-if="$route.name !== 'login'"
-            :to="{ name: 'login' }"
-            class="button__rounded--transparent button--white px-4"
-            >Login</b-nav-item
-          >
-          <b-nav-item
-            v-if="$route.name !== 'register'"
-            :to="{ name: 'register' }"
-            class="button__rounded--transparent button--white px-4"
-            >Register</b-nav-item
-          >
-        </b-navbar-nav>
-      </b-navbar>
-
-      <b-navbar
-        v-else
-        fixed="top"
-        variant="white"
-        class="shadow-sm"
-        toggleable="lg"
-      >
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-brand :to="{ name: 'home' }">Matcha</b-navbar-brand>
-          <b-navbar-nav>
-            <b-nav-item :to="{ name: 'home' }">Home</b-nav-item>
-            <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
-            <b-nav-item :to="{ name: 'discover' }">Discover</b-nav-item>
-            <b-nav-item :to="{ name: 'messages' }">Messages</b-nav-item>
-          </b-navbar-nav>
-
-          <b-navbar-nav class="ml-auto">
-            <b-nav-item>
-              <Badge :count="7" :padding="7">
-                <img src="./assets/bell.svg" alt="disconnect" height="20" />
-              </Badge>
-            </b-nav-item>
-            <b-nav-item-dropdown right>
-              <NotificationRow />
-            </b-nav-item-dropdown>
-
-            <b-nav-item-dropdown text="me" right>
-              <b-nav-item :to="{ name: 'profile', params: {username: 'jterrazz'} }">My Profile</b-nav-item>
-              <b-nav-item :to="{ name: 'settings' }">Settings</b-nav-item>
-              <b-nav-item :to="{ name: 'logout' }">Disconnect</b-nav-item>
-            </b-nav-item-dropdown>
-
-            <b-nav-item>
-              <img src="./assets/power.svg" alt="disconnect" height="20" />
-            </b-nav-item>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
-    </header>
-
-    <main :class="{ 'nav-padding': !isAuthPage }">
+  <div id="app" class="d-flex flex-column">
+    <TheHeader />
+    <main :class="{ 'nav-spacing': !isAuthPage }" class="flex-1">
       <router-view class="router-view" />
     </main>
-
-    <footer v-if="isAuthPage" class="text-right fixed-bottom">
-      <p>Credits - frontend @jterrazz - backend @abbensid</p>
-      <p>42</p>
-    </footer>
-    <footer v-else class="bg-white">
-      <p>Credits - frontend @jterrazz - backend @abbensid</p>
-      <p>42</p>
-    </footer>
+    <TheFooter :class="{ 'fixed-bottom bg-transparent': isAuthPage }" />
   </div>
 </template>
 
 <script>
-import NotificationRow from "./components/molecules/NotificationRow";
-import Badge from "./components/atoms/Bagde";
+import TheFooter from "./components/organisms/TheFooter";
+import TheHeader from "./components/organisms/TheHeader";
+
 export default {
   name: "App",
-  components: {Badge, NotificationRow },
+  components: { TheHeader, TheFooter },
   data: function() {
     return {
-      isAuthPage: ["login", "register"].indexOf(this.$route.name) >= 0
+      isAuthPage: ["login", "register"].indexOf(this.$route.name) >= 0,
+      gettingLocation: false,
+        location: null,
+        errorStr: null
     };
-  }
+  },
+    created() {
+      // TODO Send position at app start
+      navigator.geolocation.getCurrentPosition(pos => {
+          this.gettingLocation = true;
+          this.location = pos;
+          console.log(pos)
+      }, err => {
+          this.errorStr = err.message;
+      })
+    }
 };
 </script>
 
@@ -108,8 +49,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%;
   background-color: $background;
+  font-size: 0.96em;
+  font-weight: 500;
 }
-.nav-padding {
+.nav-spacing {
   padding-top: 56px;
 }
 </style>

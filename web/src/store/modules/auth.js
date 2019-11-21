@@ -4,7 +4,8 @@ const state = {
   me: {
     infos: null,
     likedBy: null,
-    seenBy: null
+    seenBy: null,
+    contacts: null
   }
 };
 
@@ -23,10 +24,14 @@ const actions = {
   },
   async fetchMyInteractions({ commit }) {
     // TODO Async together
-    const { data: likes } = await matchaAPI.getMyLikes();
-    const { data: views } = await matchaAPI.getMyViews();
-    commit("setLikedBy", likes);
-    commit("setSeenBy", views);
+    const { data: dataLikes } = await matchaAPI.getMyLikes();
+    const { data: dataViews } = await matchaAPI.getMyViews();
+    commit("setLikedBy", dataLikes.likes);
+    commit("setSeenBy", dataViews.views);
+  },
+  async fetchMyContacts({ commit }) {
+    const { data } = await matchaAPI.getMyContacts();
+    commit("setContacts", data.contacts);
   }
 };
 
@@ -39,6 +44,9 @@ const mutations = {
   },
   setSeenBy(state, seenBy) {
     state.me.seenBy = seenBy;
+  },
+  setContacts(state, contacts) {
+    state.me.contacts = contacts;
   }
 };
 

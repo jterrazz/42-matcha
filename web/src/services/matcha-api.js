@@ -47,6 +47,10 @@ class MatchaAPI {
     return await this.api.get(`/messages/${username}.json`);
   }
 
+  async likeUser(username) {
+    return
+  }
+
   /*
    * Search routes
    */
@@ -56,7 +60,7 @@ class MatchaAPI {
   }
 
   async search(params) {
-    return await this.api.get(`/suggestions.json`);
+    return await this.api.get(`/search.json`);
   }
 }
 

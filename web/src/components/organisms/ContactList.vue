@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-white p-3 shadow-sm rounded">
+  <nav class="bg-white p-3 border rounded">
     <div v-if="contacts && contacts.length">
       <h3 class="section-title">Contacts</h3>
       <div class="dropdown-divider" />

@@ -3,11 +3,11 @@
     <h3>Sort by</h3>
     <h3>Filters</h3>
     <h4>Age</h4>
-    <VueSlider v-model="options.filters.age" :min="18" :max="99" enable-cross="false"/>
+    <VueSlider v-model="options.filters.age" :min="18" :max="99" :enable-cross="false"/>
     <h4>Distance</h4>
-    <VueSlider v-model="options.filters.age" :min="18" :max="99" enable-cross="false"/>
+    <VueSlider v-model="options.filters.age" :min="18" :max="99" :enable-cross="false"/>
     <h4>Popularity</h4>
-    <VueSlider v-model="options.filters.age" :min="18" :max="99" enable-cross="false"/>
+    <VueSlider v-model="options.filters.age" :min="18" :max="99" :enable-cross="false"/>
     <h4>Tags</h4>
     <b-button>Reset</b-button>
   </div>

@@ -1,14 +1,16 @@
 <template>
-  <section class="bg-white overflow-hidden rounded shadow-sm">
-    <CenterImage square>
-      <Like class="position-absolute" style="bottom: 0; right: 0;" />
+  <section class="bg-white overflow-hidden rounded border">
+    <CenterImage :src="images[0]" square>
+      <Like :amount="nbLikes" class="position-absolute" style="bottom: 10px; right: 10px;" />
     </CenterImage>
 
-    <div class="p-3 bg-primary text-white">
+    <div class="p-3 bg-white border-top">
       <h4>{{ firstName }} {{ lastName }}</h4>
-      <p>{{ postalAddress }}</p>
-      <p>{{ description }}</p>
-      <router-link to="/">Access profile</router-link>
+      <p>{{ biography }}</p>
+
+      <div class="text-right text-muted">
+        <router-link :to="{ name: 'user', params: { username } }">My profile</router-link>
+      </div>
     </div>
   </section>
 </template>
@@ -18,13 +20,15 @@ import CenterImage from "../atoms/CenterImage";
 import Like from "../atoms/Like";
 
 export default {
-  name: "ProfilePreview",
+  name: "MePreview",
   components: { Like, CenterImage },
   props: {
     firstName: String,
     lastName: String,
-    postalAddress: String,
-    description: String
+    biography: String,
+    images: Array,
+    username: String,
+      nbLikes: Number
   }
 };
 </script>

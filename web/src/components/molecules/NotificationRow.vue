@@ -1,7 +1,7 @@
 <template>
   <div>
-    hoooooo
-    {{ type }}{{ message }}
+    <div><b>{{ type }}</b></div>
+    <div>{{ text }}</div>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   name: "NotificationRow",
   props: {
     type: String,
-    message: String
+      text: String
   }
 };
 </script>

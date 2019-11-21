@@ -1,7 +1,7 @@
 <template>
-  <div class="p-1 bg-white rounded-max">
+  <div class="py-1 px-2 rounded-max bg-warning">
     {{ amount }}
-    <img src="../../assets/heart.svg" class="w-md" height="24" />
+    <img src="../../assets/heart.svg" height="20" />
   </div>
 </template>
 
@@ -9,7 +9,6 @@
 export default {
   name: "Like",
   props: {
-    liked: Boolean,
     amount: Number
   }
 };

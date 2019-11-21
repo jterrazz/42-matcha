@@ -1,99 +1,54 @@
 <template>
-  <b-container class="p-5">
+  <b-container class="px-lg-5 py-lg-4">
     <b-row>
       <b-col md="3">
-        <MePreview
-          :first-name="me.firstName"
-          :last-name="me.lastName"
-          :postal-address="me.postalAddress"
-          :description="me.description"
-        ></MePreview>
-        <ContactsList class="mt-4"></ContactsList>
+        <MePreview v-bind="me.infos" />
+        <ContactsList :contacts="me.contacts" class="mt-4" />
       </b-col>
+
       <b-col md="9">
+        <h1>Welcome back {{ me.infos.firstName }}!</h1>
+        Find bellow what happened with your profile 😎
+
         <router-link :to="{ name: 'discover' }">
           <div
             class="rounded gd-m p-3 text-center text-white font-weight-bolder"
           >
-            Meet new people
+            Or discover new people
           </div>
         </router-link>
 
-        <h2 class="mt-3">They liked me</h2>
-        <Flickity ref="flickity" :options="flickityOptions">
-          <ProfilePreview v-for="u in me.likedBy" class="carousel-cell" />
-        </Flickity>
+        <h2 class="mt-3 mb-2 title">They liked me</h2>
+        <user-carousel :users="me.likedBy" />
 
-        <h2>They saw my profile</h2>
-        <Flickity ref="flickity" :options="flickityOptions">
-          <ProfilePreview v-for="u in me.likedBy" class="carousel-cell" />
-        </Flickity>
+        <h2 class="mt-3 mb-2 title">They saw my profile</h2>
+        <user-carousel :users="me.seenBy" />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import Flickity from "vue-flickity";
 import { mapState } from "vuex";
 
 import MePreview from "../molecules/MePreview";
-import ContactsList from "../organisms/ContactsList";
-import ProfilePreview from "../molecules/ProfilePreview";
+import ContactsList from "../organisms/ContactList";
+import UserCarousel from "../organisms/UserCarousel";
 
 export default {
   name: "HomePage",
   components: {
-    ProfilePreview,
+    UserCarousel,
     MePreview,
-    ContactsList,
-    Flickity
+    ContactsList
   },
-  data: () => ({
-    flickityOptions: {
-      // wrapAround: true,
-      contain: true,
-      groupCells: true
-      // autoPlay: 5000
-    }
-  }),
   computed: mapState({
     me: state => state.auth.me
   }),
   mounted() {
     this.$store.dispatch("auth/fetchMeIfNeeded");
     this.$store.dispatch("auth/fetchMyInteractions");
+    this.$store.dispatch("auth/fetchMyContacts");
   }
 };
 </script>
-
-<style lang="scss">
-.carousel-cell {
-  width: 25%;
-  margin-right: 10px;
-}
-
-.flickity-button {
-  background: #333;
-}
-.flickity-button:hover {
-  background: #f90;
-}
-
-.flickity-prev-next-button {
-  width: 30px;
-  height: 30px;
-  border-radius: 5px;
-}
-/* icon color */
-.flickity-button-icon {
-  fill: white;
-}
-/* position outside */
-.flickity-prev-next-button.previous {
-  left: -40px;
-}
-.flickity-prev-next-button.next {
-  right: -40px;
-}
-</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="position-relative">
     <div
-      :class="{ square }"
+      :class="{ 'pb-100': square }"
       :style="
         'background-image: url(\'' +
           src +
@@ -22,9 +22,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.square {
-  padding-bottom: 100%;
-}
-</style>

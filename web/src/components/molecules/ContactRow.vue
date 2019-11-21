@@ -25,9 +25,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.w-md {
-  width: 48px;
-}
-</style>

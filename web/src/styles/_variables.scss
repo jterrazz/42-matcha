@@ -1,7 +1,7 @@
-$primary: #283149;
-$secondary: #404b69;
+$primary: #0B0B18;
+$secondary: #0061ff;
 $warning: #f73859;
-$muted: #899bb4;
+$muted: #8D9498;
 $border: #d5dfec;
 
 $primary_darker: rgb(60, 73, 161);
@@ -16,12 +16,38 @@ $primary_darkest: rgb(31, 41, 107);
 $danger: rgb(232, 107, 127);
 $background: #f6f5f8;
 
+.bg {
+  background: $background;
+}
+
 $breakpoints: (
   xs: 576px,
   sm: 768px,
   md: 992px,
   lg: 1200px
 );
+
+.w-33 {
+  width: 33.333333%;
+}
+
+.btn {
+  letter-spacing: 0.6px;
+  font-size: 1em;
+}
+a {
+  color: inherit !important ;
+}
+.flex-1 {
+  flex: 1;
+}
+
+$muted-bg: #f1f1f3;
+
+.btn-muted {
+  background: $muted-bg;
+  color: $muted;
+}
 
 .nav-item {
   display: flex;

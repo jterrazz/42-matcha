@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "MessageBubble",
+  name: "TextBubble",
   props: {
     message: String,
     me: Boolean

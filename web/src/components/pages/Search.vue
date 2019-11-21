@@ -2,8 +2,7 @@
   <b-container>
     <b-row>
       <b-col cols="9">
-        {{ results }}
-
+        <UserPreview v-for="u in results" :key="u.id" :user="u" class="w-33 float-left" />
       </b-col>
       <b-col cols="3">
         <SearchOptions />
@@ -13,17 +12,19 @@
 </template>
 
 <script>
-import SearchOptions from "../molecules/SearchOptions";
+import SearchOptions from "../organisms/SearchOptions";
+import UserPreview from "../molecules/UserPreview";
+
 export default {
   name: "SearchPage",
-    components: {SearchOptions},
+    components: {UserPreview, SearchOptions},
     data: () => ({
     results: null
   }),
   mounted() {
     this.$matchaAPI
       .search(this.params)
-      .then(({ data: res }) => (this.results = res))
+      .then(({ data }) => (this.results = data.results))
       .catch(console.error);
   }
 };

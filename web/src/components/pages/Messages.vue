@@ -2,19 +2,20 @@
   <b-container class="p-5">
     <b-row>
       <b-col md="3">
-        <ContactsList :contacts="contacts"></ContactsList>
+        <ContactsList :contacts="me.contacts"></ContactsList>
       </b-col>
-      <b-col md="9" class="bg-white rounded shadow-sm">
+      <b-col md="9" class="bg-white rounded border">
         <h2 class="mt-3">Jean-Baptiste</h2>
         <p class="text-muted">Last message 2 years ago</p>
 
         <div class="dropdown-divider" />
 
         <div class="d-flex flex-column py-2">
-          <MessageBubble
+          <TextBubble
             v-for="m in messages"
+            :key="m.id"
             :message="m.text"
-            :me="me.infos.userId === m.userId"
+            :me="me.infos.id === m.userId"
           />
         </div>
 
@@ -27,15 +28,15 @@
 <script>
 import { mapState } from "vuex";
 
-import ContactsList from "../organisms/ContactsList";
-import MessageBubble from "../atoms/MessageBubble";
+import ContactsList from "../organisms/ContactList";
+import TextBubble from "../atoms/TextBubble";
 import MessageInput from "../molecules/MessageInput";
 
 export default {
   name: "MessagesPage",
   components: {
     MessageInput,
-    MessageBubble,
+    TextBubble,
     ContactsList
   },
   data: () => ({
@@ -47,10 +48,7 @@ export default {
   }),
   mounted() {
     this.$store.dispatch("auth/fetchMeIfNeeded");
-    this.$matchaAPI
-      .getMyContacts()
-      .then(({ data }) => (this.contacts = data.contacts))
-      .catch(console.error);
+    this.$store.dispatch("auth/fetchMyContacts");
     this.$matchaAPI
       .getMessages(this.$route.params.username)
       .then(({ data }) => (this.messages = data.messages))
