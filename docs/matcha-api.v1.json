@@ -33,6 +33,30 @@
             "passport token": []
           }
         ]
+      },
+      "patch": {
+        "summary": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Me"
+              }
+            }
+          },
+          "description": ""
+        },
+        "security": [
+          {
+            "passport token": []
+          }
+        ],
+        "description": "Modify the logged user properties. Some fields are not modifiable (like id / username)"
       }
     },
     "/users/{username}": {
