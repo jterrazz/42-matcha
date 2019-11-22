@@ -1,8 +1,16 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "matcha-api",
-    "version": "1.0"
+    "title": "Matcha REST API",
+    "version": "1.0",
+    "description": "This API handles all the logic related to the Matcha Web Application.",
+    "contact": {
+      "name": "Terrazzoni Jean-Baptiste",
+      "email": "jterrazz@protonmail.com"
+    },
+    "license": {
+      "name": "MIT"
+    }
   },
   "servers": [
     {
@@ -12,7 +20,7 @@
   "paths": {
     "/me": {
       "get": {
-        "summary": "Me",
+        "summary": "Me - Details",
         "tags": [],
         "responses": {
           "200": {
@@ -35,7 +43,7 @@
         ]
       },
       "patch": {
-        "summary": "",
+        "summary": "Me - update",
         "responses": {
           "200": {
             "description": "OK"
@@ -367,6 +375,74 @@
         "description": "Register a user using its username, mail and password."
       },
       "parameters": []
+    },
+    "/users/{username}/like": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "username",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "User - like",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "If the user was not like, like the user. Else it dislikes the user."
+      }
+    },
+    "/auth/reset-email": {
+      "post": {
+        "summary": "Reset email",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Ask to send a reset email."
+      },
+      "parameters": []
+    },
+    "/auth/reset-password": {
+      "post": {
+        "summary": "Reset password",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "newPassword": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "From a JWT token in the url params, receive the new password",
+        "parameters": []
+      }
     }
   },
   "components": {
