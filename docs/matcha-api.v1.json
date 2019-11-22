@@ -12,7 +12,7 @@
   "paths": {
     "/me": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Me",
         "tags": [],
         "responses": {
           "200": {
@@ -26,7 +26,13 @@
             }
           }
         },
-        "requestBody": {}
+        "requestBody": {},
+        "description": "Get details of the current logged user",
+        "security": [
+          {
+            "passport token": []
+          }
+        ]
       }
     },
     "/users/{username}": {
@@ -39,7 +45,7 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "User",
         "tags": [],
         "responses": {
           "200": {
@@ -61,12 +67,13 @@
             "in": "query",
             "name": "username"
           }
-        ]
+        ],
+        "description": "Get details of a username."
       }
     },
     "/search": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Search",
         "tags": [],
         "responses": {
           "200": {
@@ -87,12 +94,13 @@
               }
             }
           }
-        }
+        },
+        "description": "Returns a list of user based on the search params"
       }
     },
     "/suggestions": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Suggestions",
         "tags": [],
         "responses": {
           "200": {
@@ -113,12 +121,13 @@
               }
             }
           }
-        }
+        },
+        "description": "Return a list of users based on the currently logged user."
       }
     },
-    "/messages": {
+    "/messages/{username}": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Messages",
         "tags": [],
         "responses": {
           "200": {
@@ -150,12 +159,28 @@
               }
             }
           }
+        },
+        "description": "Get all the messages from the logged user to a username",
+        "security": [
+          {
+            "passport token": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "username",
+          "in": "path",
+          "required": true
         }
-      }
+      ]
     },
     "/me/contacts": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Contacts",
         "tags": [],
         "responses": {
           "200": {
@@ -188,12 +213,18 @@
               }
             }
           }
-        }
+        },
+        "description": "Get all the available contacts (both users liked each other)",
+        "security": [
+          {
+            "passport token": []
+          }
+        ]
       }
     },
     "/me/likes": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "My likes",
         "tags": [],
         "responses": {
           "200": {
@@ -214,12 +245,13 @@
               }
             }
           }
-        }
+        },
+        "description": "Get all the likes reveiced by the logged user."
       }
     },
     "/me/views": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "My views",
         "tags": [],
         "responses": {
           "200": {
@@ -240,12 +272,13 @@
               }
             }
           }
-        }
+        },
+        "description": "Get all the views received by the logged user."
       }
     },
-    "/login": {
+    "/auth/login": {
       "post": {
-        "summary": "",
+        "summary": "Auth - Login",
         "responses": {
           "200": {
             "description": "OK",
@@ -274,8 +307,42 @@
               }
             }
           }
-        }
-      }
+        },
+        "description": "Login a user using its username/password."
+      },
+      "parameters": []
+    },
+    "/auth/register": {
+      "post": {
+        "summary": "Auth - Register",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Register a user using its username, mail and password."
+      },
+      "parameters": []
     }
   },
   "components": {
@@ -332,39 +399,49 @@
         }
       },
       "Me": {
-        "title": "Me",
-        "type": "object",
-        "x-examples": {
-          "example-1": {}
-        },
-        "properties": {
-          "id": {
+        "allOf": [
+          {
             "$ref": "#/components/schemas/User"
           },
-          "notifications": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string"
-                },
-                "id": {
-                  "type": "number"
-                },
-                "to": {
-                  "type": "string"
-                },
-                "text": {
-                  "type": "string"
-                },
-                "seen": {
-                  "type": "boolean"
+          {
+            "type": "object",
+            "properties": {
+              "notifications": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "number"
+                    },
+                    "to": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "seen": {
+                      "type": "boolean"
+                    }
+                  }
                 }
+              },
+              "email": {
+                "type": "string"
               }
             }
           }
-        }
+        ]
+      }
+    },
+    "securitySchemes": {
+      "passport token": {
+        "name": "token",
+        "type": "apiKey",
+        "in": "query"
       }
     }
   }
