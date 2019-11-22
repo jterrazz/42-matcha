@@ -7,16 +7,18 @@
       </b-col>
 
       <b-col md="9">
-        <h1>Welcome back {{ me.infos.firstName }}!</h1>
-        Find bellow what happened with your profile 😎
+        <div class="border rounded text-center" style="background: #e5e5e5">
+          <h1>Welcome back {{ me.infos.firstName }}!</h1>
+          Find bellow what happened with your profile 😎
 
-        <router-link :to="{ name: 'discover' }">
-          <div
-            class="rounded gd-m p-3 text-center text-white font-weight-bolder"
-          >
-            Or discover new people
-          </div>
-        </router-link>
+          <router-link :to="{ name: 'discover' }">
+            <div
+              class="rounded gd-m p-3 text-center text-white font-weight-bolder"
+            >
+              Or discover new people
+            </div>
+          </router-link>
+        </div>
 
         <h2 class="mt-3 mb-2 title">They liked me</h2>
         <user-carousel :users="me.likedBy" />

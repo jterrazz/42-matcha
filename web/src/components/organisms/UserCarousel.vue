@@ -33,10 +33,11 @@
       data: () => ({
           flickityOptions: {
               adaptiveHeight: true,
-              // wrapAround: true,
               contain: true,
-              groupCells: true
-              // autoPlay: 5000
+              groupCells: true,
+              draggable: false,
+              pageDots: false,
+              prevNextButtons: false,
           },
           selectedCell: 0
       }),
