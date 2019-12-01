@@ -1,6 +1,6 @@
 # 42-matcha
 
-Meet and chat with amazing people in your area with this open source web app.
+[WIP] Meet and chat with amazing people in your area with this open source web app.
 
 *This application was made for learning purposes at the 42 Paris School.*
 
