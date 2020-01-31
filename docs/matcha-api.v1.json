@@ -492,7 +492,7 @@
   },
   "components": {
     "schemas": {
-      "User": {
+      "UserInfosPublic": {
         "title": "User",
         "type": "object",
         "properties": {
@@ -543,7 +543,7 @@
           }
         }
       },
-      "Me": {
+      "UserInfosPrivate": {
         "allOf": [
           {
             "$ref": "#/components/schemas/User"
@@ -559,17 +559,11 @@
                     "type": {
                       "type": "string"
                     },
-                    "id": {
-                      "type": "number"
-                    },
-                    "to": {
+                    "createdAt": {
                       "type": "string"
                     },
-                    "text": {
-                      "type": "string"
-                    },
-                    "seen": {
-                      "type": "boolean"
+                    "originUser": {
+                      "$ref": "#/components/schemas/User"
                     }
                   }
                 }
