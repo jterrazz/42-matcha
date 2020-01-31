@@ -308,7 +308,7 @@
         "description": "Get all the views received by the logged user."
       }
     },
-    "/auth/login": {
+    "/auth/signin": {
       "post": {
         "summary": "Auth - Login",
         "responses": {
@@ -344,7 +344,7 @@
       },
       "parameters": []
     },
-    "/auth/register": {
+    "/auth/signup": {
       "post": {
         "summary": "Auth - Register",
         "responses": {
@@ -372,7 +372,33 @@
             }
           }
         },
-        "description": "Register a user using its username, mail and password."
+        "description": "Register a user using its username, mail and password.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "parameters": []
     },
