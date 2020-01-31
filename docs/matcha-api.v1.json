@@ -476,10 +476,10 @@
             "type": "string"
           },
           "nbLikes": {
-            "type": "string"
+            "type": "number"
           },
           "nbViews": {
-            "type": "string"
+            "type": "number"
           },
           "fameRating": {
             "type": "string"
