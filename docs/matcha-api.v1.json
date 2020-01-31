@@ -469,6 +469,25 @@
         "description": "From a JWT token in the url params, receive the new password",
         "parameters": []
       }
+    },
+    "/auth/verify-email": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-auth-activate-email",
+        "description": "CAll with the JWT you receive in your registration email (24h delay).",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "token"
+          }
+        ]
+      },
+      "parameters": []
     }
   },
   "components": {
