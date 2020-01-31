@@ -28,7 +28,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Me"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/UserInfosPrivate"
+                    }
+                  ]
                 }
               }
             }
@@ -53,7 +57,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Me"
+                "$ref": "#/components/schemas/UserInfosPublic"
               }
             }
           },
@@ -488,6 +492,14 @@
         ]
       },
       "parameters": []
+    },
+    "/me/notifications": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-me-notifications"
+      }
     }
   },
   "components": {
@@ -497,6 +509,9 @@
         "type": "object",
         "properties": {
           "id": {
+            "type": "string"
+          },
+          "createdAt": {
             "type": "string"
           },
           "username": {
@@ -511,7 +526,7 @@
           "gender": {
             "type": "string"
           },
-          "age": {
+          "birthdate": {
             "type": "string"
           },
           "sexualPreference": {
@@ -520,14 +535,20 @@
           "biography": {
             "type": "string"
           },
-          "nbLikes": {
-            "type": "number"
+          "likedBy": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
-          "nbViews": {
-            "type": "number"
+          "seenBy": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "fameRating": {
-            "type": "string"
+            "type": "number"
           },
           "interests": {
             "type": "array",
@@ -546,7 +567,7 @@
       "UserInfosPrivate": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/User"
+            "$ref": "#/components/schemas/UserInfosPublic"
           },
           {
             "type": "object",
