@@ -44,7 +44,7 @@
     "passport-oauth2-refresh": "^1.1.0",
     "passport-twitter": "^1.0.4",
     "request": "^2.88.2",
-    "validator": "^12.2.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
