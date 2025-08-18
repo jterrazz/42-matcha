@@ -8,24 +8,22 @@ Meet and chat with amazing people in your area with this open source web app.
 
 *This application was made for learning purposes at the 42 Paris School.*
 
-## Starting guide
+## Research notes
+
+```
 ### Requirements
 - `docker`
 
 Start the app
-``` bash
 docker-compose up
-```
 
 ### Development environment
 Requires `NodesJS >=10.16` and `MongoDB` (can be started in `docker`)
 
-``` bash
 # /web
 yarn # Install dependencies
 yarn serve # Hot reload API
 yarn lint # Lint with autofix
-```
 
 ## Implementation
 
@@ -36,3 +34,4 @@ We manage the app state with `VueX`, `vue-router` to simulate the routes, `axios
 
 ### Server
 The [API Documentation is available here](https://stoplight.io/p/docs/gh/jterrazz/42-matcha).
+```
