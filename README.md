@@ -1,10 +1,10 @@
+> Hey there – I’m Jean-Baptiste, just another developer doing weird things with code. All my projects live on [jterrazz.com](https://jterrazz.com) – complete with backstories and lessons learned. Feel free to poke around – you might just find something useful!
+
 # 42-matcha
 
 Meet and chat with amazing people in your area with this open source web app.
 
 ⚠️ **Project not completed – kept here for archival purposes only.**
-
-> Hey there – I’m Jean-Baptiste, just another developer doing weird things with code. All my projects live on [jterrazz.com](https://jterrazz.com) – complete with backstories and lessons learned. Feel free to poke around – you might just find something useful!
 
 *This application was made for learning purposes at the 42 Paris School.*
 
